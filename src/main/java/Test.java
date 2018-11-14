@@ -43,7 +43,7 @@ public class Test {
         public void run() {
 
             for(int i=0;i<10000;i++) {
-                System.out.println(i+"111");
+                System.out.println(i+"000");
                 try {
                     Thread.sleep(20);
                 }catch (InterruptedException e){
