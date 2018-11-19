@@ -10,7 +10,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>HTML5 登录动画特效</title>
+  <title>登录页面</title>
   <link rel="stylesheet" href="static/lib/layui/css/layui.css" media="all" />
   <link rel="stylesheet" href="static/css/login.css" />
   <link rel="stylesheet" href="static/css/tooltips.css" />
@@ -51,7 +51,7 @@
     <h1 style="color:#FFFFFF">欢迎登录</h1>
   </header>
   <div class="beg-login-main">
-    <form action="/user/login" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
+    <form action="/User/login" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
       <div class="layui-form-item">
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe612;</i>
@@ -69,7 +69,7 @@
           <i class="layui-icon">&#xe6b2;</i>
         </label>
         <input id="regcode_register" type="text" name="regcode" lay-verify="regcode" autocomplete="off" placeholder="请输入验证码" class="layui-input">
-        <img src="" style="display:inline-block; width:20%; background-color: black">
+        <img src="/User/valicode" style="display:inline-block; width:20%; background-color: black">
       </div>
       <div class="layui-form-item">
 
@@ -105,12 +105,12 @@
     <h1 style="color:#FFFFFF">欢迎注册</h1>
   </header>
   <div class="beg-login-main">
-    <form action="" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
+    <form action="/User/register" class="layui-form" method="post" onsubmit="return register()"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
       <div class="layui-form-item">
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe612;</i>
         </label>
-        <input id="username_register" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+        <input id="username_register" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" onblur="checkName()" class="layui-input" >
       </div>
       <div class="layui-form-item">
         <label class="beg-login-icon">
@@ -122,18 +122,18 @@
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe642;</i>
         </label>
-        <input id="determine_password_register" type="password" name="password" lay-verify="password" autocomplete="off" placeholder="确认密码" class="layui-input">
+        <input id="determine_password_register" type="password" name="datermine_password" lay-verify="password" autocomplete="off" placeholder="确认密码" class="layui-input">
       </div>
       <div class="layui-form-item">
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe6b2;</i>
         </label>
-        <input id="regcode_register" type="text" name="regcode" lay-verify="regcode" autocomplete="off" placeholder="请输入注册码" class="layui-input">
+        <input id="email_register" type="text" name="email" lay-verify="regcode" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
       </div>
       <div class="layui-form-item">
         <div class="beg-pull-left beg-login-remember" style="color:#FFFFFF;margin-top: 6%;">
-          <button class="layui-btn" onclick="register();return false;">
-            <i class="layui-icon">&#xe650;</i> 注册
+          <button class="layui-btn" type="submit" >
+            <i class="layui-icon">&#xe650;</i> 注册</button>
         </div>
 
         <div class="beg-pull-right">
@@ -151,7 +151,7 @@
     <h1 style="color:#FFFFFF">重置密码</h1>
   </header>
   <div class="beg-login-main">
-    <form action="" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
+    <form action="/User/register" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
       <div class="layui-form-item">
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe612;</i>
@@ -211,6 +211,8 @@
     canvas.height = h;
 
     var mols = [];
+
+
 
     function init(){
         for(var i=0;i<18;i++){
@@ -418,9 +420,45 @@
         $("#login").hide();
         $("#reset").hide();
     }
+    function  checkName() {
+
+            //给账号文本框绑定失去焦点的事件
+
+                //alert("测试"+$(this).val());
+                $.ajax({
+                    url:"/User/checkUserName",//设置服务器地址，即为servlet配置的url-pattern
+                    type:"post",//提交的方式
+                    data:{username:$("#username_register").val()},
+                    //提交到服务器的数据，多个值以逗号分割开{account:$(this).val(),...}
+                    dataType:"json",
+                    success:function(data) {//回调函数，data是返回的数据
+                        if (parseInt(data.isok) == 0) {
+                            $.pt({
+                                target: $("#username_register"),
+                                position: 'r',
+                                align: 't',
+                                width: 'auto',
+                                height: 'auto',
+                                content: "该用户名可以注册"
+                            });
+
+                        } else if (parseInt(data.isok) == 1) {
+                            $.pt({
+                                target: $("#username_register"),
+                                position: 'r',
+                                align: 't',
+                                width: 'auto',
+                                height: 'auto',
+                                content: "该用户名已经注册！！！"
+                            });
+                        }
+                    }
+        });
+        
+    }
 
     function register(){
-        var regcode_register = $("#regcode_register").val();
+        var email_register = $("#email_register").val();
         var username_register = $("#username_register").val();
         var password_register = $("#password_register").val();
         var determine_password_register = $("#determine_password_register").val();
@@ -461,18 +499,22 @@
             return false;
         }
         //注册码不能为空
-        if(regcode_register == ""){
+        var email_ = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+        if(email_register== null || email_register==" " || !email_.test(email_register)){
             $.pt({
-                target: $("#regcode_register"),
+                target: $("#email_register"),
                 position: 'r',
                 align: 't',
                 width: 'auto',
                 height: 'auto',
-                content:"注册码不能为空"
+                content:"邮箱格式有误，请重新输入"
             });
             return false;
+
         }
-        alert("注册成功");
+
+
+        return true;
     }
     function goto_login(){
         $("#register").hide();

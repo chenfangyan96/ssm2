@@ -4,7 +4,8 @@
     <resultMap id="BaseResultMap" type="com.sp.test.domain.User">
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
-        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="status" property="status"  />
+        <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     </resultMap>
     <!-- 查询所有用户 -->
@@ -13,27 +14,34 @@
 	</select>
     <!-- 更新用户状态 -->
     <update id="updateUserSts">
-	    update tb_users set update_time=now(),status=#{status,jdbcType=VARCHAR} where id=#{id,jdbcType=BIGINT}
+	    update tb_users set status=#{status,jdbcType=BIGINT} where id=#{id,jdbcType=BIGINT}
 	</update>
+    <insert id="insert">
+        INSERT  INTO tb_users(user_name,password,email,validateCode,status,update_time) VALUES(#{userName},#{password},#{email},#{validateCode},0,NOW())
+    </insert>
     <delete id="deleteUser">
         delete from tb_users WHERE id=#{id,jdbcType=BIGINT}
     </delete>
-    <select id="getByConditionPage" resultMap="BaseResultMap">
+    <select id="getByCondition" resultMap="BaseResultMap">
     select * from  tb_users
     <where>
         <if test="id !=null &amp;&amp; id>0">
             and id=#{id}
         </if>
-        <if test="status !=null &amp;&amp;status!=''">
-            and status=#{status}
+        <if test="email !=null &amp;&amp;email!=''">
+            and email=#{email}
         </if>
-        <if test="showName !=null &amp;&amp; showName != '' ">
-            and showName=#{showName}
+        <if test="validateCode !=null &amp;&amp; validateCode != '' ">
+            and validateCode=#{validateCode}
         </if>
     </where>
+        limit 1
     </select>
     <select id="selectByUser" resultMap="BaseResultMap">
         SELECT  * FROM  tb_users WHERE  user_name=#{userName}
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        SELECT  * FROM  tb_users WHERE  email=#{email}
     </select>
 
 

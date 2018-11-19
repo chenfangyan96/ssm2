@@ -25,7 +25,11 @@ public interface UserMapper {
 	 * @param status
 	 * @return
 	 */
-	int updateUserSts(@Param("id") Long id, @Param("status") String status);
+	int updateUserSts(User user);
 	int deleteUser(@Param("id") Long id);
+	int insert(User user);
+	User selectByEmail(@Param("email") String email);
+
+
 
 }

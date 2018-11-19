@@ -20,10 +20,10 @@ public interface UserService {
     /**
      * 更新某一个用户状态
      * @param id :用户id也对应表某条记录主键id
-     * @param status：1-启用 0-禁用
+     * @param status：1-激活 0-未激活
      * @return
      */
-    int updateUserSts(Long id,String status);
+    int updateUserSts(User user);
 
     /**
      * 删除某个元素
@@ -32,5 +32,8 @@ public interface UserService {
      */
     int deleteUser(Long id);
     User selectByUser(String userName);
+    int insert(User user);
+    User selectByEmail(String email);
+
 
 }

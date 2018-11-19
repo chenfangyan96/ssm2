@@ -14,16 +14,6 @@
         </webroots>
       </configuration>
     </facet>
-    <facet type="web" name="Web">
-      <configuration>
-        <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../../src/main/webapp/static/lib/layui/images/face/18.gif" />
-        </descriptors>
-        <webroots>
-          <root url="file://$MODULE_DIR$/../../src/main/webapp/static/lib/layui/images/face" relative="/WEB-INF" />
-        </webroots>
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../out/production/classes" />
@@ -60,6 +50,9 @@
     <orderEntry type="library" name="Gradle: com.alibaba:fastjson:1.2.47" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.5" level="project" />
     <orderEntry type="library" name="Gradle: com.alibaba:druid:1.1.10" level="project" />
+    <orderEntry type="library" name="Gradle: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Gradle: javax.activation:activation:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.7" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.9" level="project" />

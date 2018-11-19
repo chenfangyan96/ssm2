@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,7 +11,15 @@
        http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-    <context:property-placeholder location="classpath*:properties/spring-config-jdbc.properties"/>
+    <!-- 与上面的配置等价，下面的更容易理解 -->
+    <bean class="com.sp.test.util.EntryptPropertyPlaceholderConfigurer">
+        <property name="locations"> <!-- PropertyPlaceholderConfigurer类中有个locations属性，接收的是一个数组，即我们可以在下面配好多个properties文件 -->
+            <array>
+                <value>classpath:properties/spring-config-jdbc.properties</value>
+            </array>
+        </property>
+    </bean>
+    <!--<context:property-placeholder location="classpath*:properties/spring-config-jdbc.properties"/>-->
 
     <!-- 自动扫描 项目所有注解 注册成bean，spring 和 springMVC 整合，把controler下面的 controller去除,如果不去除会影响事务管理的。   -->
     <context:component-scan base-package="com.sp.test">

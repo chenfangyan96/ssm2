@@ -20,7 +20,28 @@ public class User implements Serializable{
 	/** 密码 */
 	private String password;
 	/** 状态 */
-	private String status;
+	private int status;
+	/**   新邮箱*/
+	private  String email;
+	/**激活码*/
+	private  String validateCode;
+
+	public String getValidateCode() {
+		return validateCode;
+	}
+
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	/** 更新时间 */
 	private Date updateTime;
 
@@ -44,10 +65,10 @@ public class User implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public Date getUpdateTime() {
