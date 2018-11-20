@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -69,33 +71,53 @@ public class UserController {
         logger.info(code);
         HttpSession session = request.getSession();
       String imagecode = (String) session.getAttribute("imageCode");
-        logger.info(imagecode);
-        User re= userService.selectByUser(userName);
-        System.out.println(code+"hello world"+imagecode);
-        if(userName.equals(re.getUserName()) && userName!=null && !("").equals(userName))
-                if (password.equals(re.getPassword()) && password!=null){
+        if (code != null && !"".equals(code) && imagecode != null && !"".equals(imagecode)) {
+            if (code.equalsIgnoreCase(imagecode)) {
+                logger.info("验证通过！");
+                User re = userService.selectByUser(userName);
+                System.out.println(code + "hello world" + imagecode);
+                if (userName.equals(re.getUserName()) && userName != null && !("").equals(userName))
+                    if (password.equals(re.getPassword()) && password != null) {
                         return "/user/success";
-                }
+                    } else {
+                        session.setAttribute("msg", "验证失败2！");
+                        return "/user/fail";
 
-
+                    }
+            } else {
+                session.setAttribute("msg", "验证失败1！");
+                return "/user/fail";
+            }
+        }
+        session.setAttribute("msg", "验证失败3！");
         return "/user/fail";
+
     }
 
 
     //生成验证码图片
     @RequestMapping(value = "/valicode")
     //对应/user/valicode.do请求
-    public void valicode(HttpServletResponse response, HttpSession session) throws Exception{
+    public void valicode(HttpServletRequest request,HttpServletResponse resp) throws Exception{
         //利用图片工具生成图片
         //第一个参数是生成的验证码，第二个参数是生成的图片
-        Object[] objs = Imageutil.createImage();
+        Map<String,Object>  map= Imageutil.createImage();
+        HttpSession session = request.getSession();
         //将验证码存入Session
-        session.setAttribute("imageCode",objs[0]);
+
+        session.setAttribute("imageCode",map.get("code").toString());
+        resp.setHeader("Pragma", "no-cache");
+        resp.setHeader("Cache-Control", "no-cache");
+        resp.setDateHeader("Expires", -1);
+
+        resp.setContentType("image/jpeg");
         //将图片输出给浏览器
-        BufferedImage image = (BufferedImage) objs[1];
-        response.setContentType("image/png");
-        OutputStream os = response.getOutputStream();
-        ImageIO.write(image, "png", os);
+        BufferedImage image = (BufferedImage) map.get("codePic");
+
+        OutputStream os = resp.getOutputStream();
+        ImageIO.write(image, "jpeg", os);
+        os.close();
+
 
 
     }

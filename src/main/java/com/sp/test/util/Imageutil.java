@@ -14,6 +14,8 @@ package com.sp.test.util;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -49,7 +51,7 @@ public final class Imageutil {
      * Object[0]：验证码字符串；
      * Object[1]：验证码图片。
      */
-    public static Object[] createImage() {
+    public static Map<String,Object> createImage() {
         StringBuffer sb = new StringBuffer();
         // 1.创建空白图片
         BufferedImage image = new BufferedImage(
@@ -85,7 +87,12 @@ public final class Imageutil {
            //         ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
         //}
         // 7.返回验证码和图片
-        return new Object[]{sb.toString(), image};
+        //return new Object[]{sb.toString(), image};
+        //7.2  返回map
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("code",sb.toString());
+        map.put("codePic",image);
+        return  map;
     }
 
     /**

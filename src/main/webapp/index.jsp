@@ -69,7 +69,7 @@
           <i class="layui-icon">&#xe6b2;</i>
         </label>
         <input id="regcode_register" type="text" name="regcode" lay-verify="regcode" autocomplete="off" placeholder="请输入验证码" class="layui-input">
-        <img src="/User/valicode" style="display:inline-block; width:20%; background-color: black">
+        <a src="#" onclick="changeImg()"><img src="/User/valicode" style="display:inline-block; width:20%; background-color: black"></a>
       </div>
       <div class="layui-form-item">
 
@@ -384,6 +384,25 @@
                 form = layui.form();
         });
     })
+    function changeImg() {
+        var imgSrc = $("#imgObj");
+        var src = imgSrc.attr("src");
+        imgSrc.attr("src", chgUrl(src));
+    }
+
+    // 时间戳
+    // 为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+    function chgUrl(url) {
+        var timestamp = (new Date()).valueOf();
+        url = url.substring(0, 20);
+        if ((url.indexOf("&") >= 0)) {
+            url = url + "×tamp=" + timestamp;
+        } else {
+            url = url + "?timestamp=" + timestamp;
+        }
+        return url;
+    }
+
 
     function login(){
         var username = $("#username").val();
