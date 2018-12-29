@@ -157,7 +157,7 @@ public class UserController {
         if (user == null) {
             model.addAttribute("msg", "无此用户");
             logger.info("没有此用户");
-            return "/user/success";
+            return "/user/fail";
         } else {
             if (user.getValidateCode().equals(validateCode)) {
                 if (user.getStatus() == 0) {
@@ -165,15 +165,14 @@ public class UserController {
                     userService.updateUserSts(user);
                     model.addAttribute("msg", "激活成功");
                     return "/user/success";
-                } else {
-                    model.addAttribute("msg", "已经失效，请勿重复点击");
-                    return "/user/fail";
                 }
 
-            } else {
-                return "/user/fail";
+
             }
         }
+        model.addAttribute("msg","激活失败");
+
+        return "/user/fail";
     }
        @RequestMapping("/checkUserName")
        @ResponseBody

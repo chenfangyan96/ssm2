@@ -27,6 +27,7 @@
     </context:component-scan>
     <context:annotation-config />
 
+
     <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <!--含义是启用Spring对aspectj切面配置的支持-->
     <aop:aspectj-autoproxy/>
